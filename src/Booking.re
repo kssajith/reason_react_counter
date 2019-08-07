@@ -31,6 +31,12 @@ let make = (~name) => {
       <input className="border-2 border-grey-500" type_="date" />
     </label>;
 
+  let insertDatePicker =
+    switch (state) {
+    | OneWay => departOn
+    | RoundTrip => <> departOn returnOn </>
+    };
+
   <div className="bg-blue-200">
     <h1 className="text-5xl text-center"> {React.string("Booking")} </h1>
     <div className="p-8 flex items-center justify-center">
@@ -57,11 +63,6 @@ let make = (~name) => {
         <span> {s("Round Trip")} </span>
       </label>
     </div>
-    <div className="flex justify-center">
-      {switch (state) {
-       | OneWay => departOn
-       | RoundTrip => <> departOn returnOn </>
-       }}
-    </div>
+    <div className="flex justify-center"> insertDatePicker </div>
   </div>;
 };

@@ -6,7 +6,7 @@ let isTemperatureValid = x => !Js.Float.isNaN(x);
 [@react.component]
 let make = () => {
   let (celcius, setCelcius) = React.useState(_ => 0.);
-  let(farenheit, setFarenheit) = React.useState(_=> 0.);
+  // let(farenheit, setFarenheit) = React.useState(_=> 0.);
 
   let handleCelciusChange = event => {
     let formTargetValue =
