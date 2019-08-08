@@ -19,17 +19,34 @@ let make = (~name) => {
     setState(_ => state);
   };
 
-  let departOn =
-    <label className="mr-8">
-      <p className="mb-2 text-center"> {s("DepartOn")} </p>
-      <input className="border-2 border-grey-500" type_="date" />
+  let dateInput = (~label, ~handleDateChange) =>
+    <label>
+      <p className="mb-2 text-center"> {s(label)} </p>
+      <input
+        className="border-2 border-grey-500"
+        type_="date"
+        onChange={event =>
+          event |> formTargetValue |> Js.Date.fromString |> handleDateChange
+        }
+      />
     </label>;
 
+  let handleDepartureDateChange = date =>
+    Js.log("This is departure date: " ++ Js.Date.toISOString(date));
+
+  let handleReturnDateChange = date =>
+    Js.log("This is return date: " ++ Js.Date.toISOString(date));
+
+  let departOn =
+    <div className="mr-8">
+      {dateInput(
+         ~label="Depart On",
+         ~handleDateChange=handleDepartureDateChange,
+       )}
+    </div>;
+
   let returnOn =
-    <label className="mr-8">
-      <p className="mb-2 text-center"> {s("Return On")} </p>
-      <input className="border-2 border-grey-500" type_="date" />
-    </label>;
+    dateInput(~label="Return On", ~handleDateChange=handleReturnDateChange);
 
   let insertDatePicker =
     switch (state) {
@@ -37,7 +54,7 @@ let make = (~name) => {
     | RoundTrip => <> departOn returnOn </>
     };
 
-  <div className="bg-blue-200">
+  <div className="bg-gray-200 h-screen">
     <h1 className="text-5xl text-center"> {React.string("Booking")} </h1>
     <div className="p-8 flex items-center justify-center">
       <label className="mr-8">
