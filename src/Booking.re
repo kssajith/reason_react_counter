@@ -1,3 +1,20 @@
+type trip_ =
+  | OneWay
+  | OneWayWithDeparture(Js.Date.t)
+  | RoundTrip
+  | RoundTripWithOnlyDeparture(Js.Date.t)
+  | RoundTripWithOnlyReturn(Js.Date.t)
+  | RoundTripWithBothDates(Js.Date.t, Js.Date.t);
+
+let tripToString_ =
+  fun
+  | OneWay
+  | OneWayWithDeparture(_) => "OneWay"
+  | RoundTrip
+  | RoundTripWithOnlyDeparture(_)
+  | RoundTripWithOnlyReturn(_)
+  | RoundTripWithBothDates(_) => "RoundTrip";
+
 type state =
   | OneWay
   | RoundTrip;
